@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="bootstrap/app.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         defaultTestSuite="local"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="postrefactorna">
+            <directory suffix="Test.php">./tests/!Post-Refactor (NA)</directory>
+            <exclude>./tests/Pre-Refactor/</exclude>
+            <exclude>./tests/Post-Refactor/</exclude>
+        </testsuite>
+        <testsuite name="postrefactor">
+            <directory suffix="Test.php">./tests/Post-Refactor</directory>
+            <exclude>./tests/Pre-Refactor/</exclude>
+            <exclude>./tests/!Post-Refactor (NA)</exclude>
+        </testsuite>
+        <testsuite name="prerefactor">
+            <directory suffix="Test.php">./tests/Pre-Refactor</directory>
+            <exclude>./tests/Post-Refactor/</exclude>
+            <exclude>./tests/!Post-Refactor (NA)</exclude>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./app</directory>
+        </whitelist>
+    </filter>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="DB_CONNECTION" value="testing"/>
+        <env name="CACHE_DRIVER" value="array"/>
+        <env name="QUEUE_DRIVER" value="sync"/>
+    </php>
+</phpunit>

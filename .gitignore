@@ -1,0 +1,15 @@
+.idea/
+vendor/
+.env
+.vscode/
+
+public/photos/
+public/images/
+app/public/
+
+database/seeds/importador/done.json
+database/seeds/importador/env.json
+database/seeds/importador/restaurants
+
+*.sql
+*.sql.gz
