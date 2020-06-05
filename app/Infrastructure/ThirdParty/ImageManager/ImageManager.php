@@ -4,7 +4,7 @@ class ImageManager
 {
     public static function delete($type, $imageTag)
     {
-        $directory = __DIR__ . env('IMAGE_DIR_2', '/../../../public/images');
+        $directory = __DIR__ . env('IMAGE_DIR', '/../../../public/images');
         if(is_dir("$directory/$type/$imageTag") && !empty($imageTag)){
             array_map('unlink', glob("$directory/$type/$imageTag/*.*"));
            //rmdir("$directory/$type/$imageTag");
@@ -13,7 +13,7 @@ class ImageManager
 
     public static function createImage($type, $image)
     {
-        $directory = __DIR__ . env('IMAGE_DIR_2', '/../../../public/images');
+        $directory = __DIR__ . env('IMAGE_DIR', '/../../../public/images');
         $filename = random_string_generator();
         $fullDir = "$directory/$type/$filename";
         

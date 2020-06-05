@@ -2,7 +2,7 @@
 
 $router->group([
     'middleware'  => 'jwt.auth', 
-    'namespace'   => 'Controllers\User'
+    'namespace'   => '\Controllers\User'
 ], function ($router) {
     $router->group([
         'prefix' => 'user',
@@ -23,7 +23,7 @@ $router->group([
 });
 
 $router->group([
-    'namespace'=>'Controllers\User'
+    'namespace'=>'\Controllers\User'
 ], function ($router){
     $router->group([
         'prefix'=>'auth'
