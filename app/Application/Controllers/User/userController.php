@@ -63,12 +63,11 @@ class MainController extends BaseController
     public function recoverPassword(Request $request)
     {
         $token       = $request->token;
-        $inputEmail  = $request->email;
         $newPassword = $request->newPassword;
         $newPasswordConfirm = $request->newPasswordConfirm;
 
         try {
-            \User\Service::recoverPassword($token, $inputEmail, $newPassword, $newPasswordConfirm);
+            \User\Service::recoverPassword($token, $newPassword, $newPasswordConfirm);
         } catch (Exception $e){
             return response()->json([
                 'message' => $e

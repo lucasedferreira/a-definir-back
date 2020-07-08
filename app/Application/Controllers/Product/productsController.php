@@ -17,6 +17,18 @@ class MainController extends BaseController
     public function create(Request $request)
     {
         $product = $request->all();
-        \Product\Service::create($product);
+        $productModel = \Product\Service::create($product);
+        return new ProductCollection($productModel);
+    }
+
+    public function getByID($productID)
+    {
+        $product = \Product\Repository::getByID($productID);
+        return new ProductCollection($product);
+    }
+
+    public function delete($productID)
+    {
+        \Product\Repository::delete($productID);
     }
 }

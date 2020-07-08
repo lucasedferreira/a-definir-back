@@ -1,6 +1,8 @@
 <?php
 namespace Resources;
 
+use \Resources\ProductImageCollection;
+
 use Illuminate\Http\Resources\Json\JsonResource;
 class ProductCollection extends JsonResource
 {
@@ -18,7 +20,8 @@ class ProductCollection extends JsonResource
             'price' => $this->price,
             'description' => $this->description,
             'available' => $this->available,
-            'categoryID' => $this->category_id
+            'categoryID' => $this->category_id,
+            'images' => ProductImageCollection::collection($this->images)
         ];
     }
 }

@@ -13,4 +13,15 @@ class MainController extends BaseController
         $categories = \ProductCategory\Repository::get();
         return ProductCategoryCollection::collection($categories);
     }
+
+    public function create(Request $request)
+    {
+        $category = $request->all();
+        return \ProductCategory\Repository::create($category);
+    }
+
+    public function delete($categoryID)
+    {
+        \ProductCategory\Repository::delete($categoryID);
+    }
 }

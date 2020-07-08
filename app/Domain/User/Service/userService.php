@@ -3,6 +3,8 @@
 namespace User;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+
 use Firebase\JWT\JWT;
 
 class Service
@@ -62,8 +64,6 @@ class Service
 
     public static function updatePassword($userID, $newPassword, $newPasswordConfirm)
     {
-        Validations::passwordStrength($newPassword, $newPasswordConfirm);
-
         Repository::update($userID, [
             'password' => Hash::make($newPassword)
         ]);
@@ -93,18 +93,19 @@ class Service
             \PasswordReset\Repository::create($email, $token);
         }
 
-        Mail::send([], [], function ($message) use ($email){
+        Mail::send([], [], function ($message) use ($email, $token){
             $view = view('mail.forgotPassword', ['retrieval_link' => $token])->render();
             $message->to($email)->subject('Recuperação de senha')->setBody($view, 'text/html');
         });
     }
 
-    public static function recoverPassword($token, $inputEmail, $newPassword, $newPasswordConfirm)
+    public static function recoverPassword($token, $newPassword, $newPasswordConfirm)
     {
         \PasswordReset\Validations::validateToken($token);
-        \PasswordReset\Validations::tokenEmailMatch($token, $inputEmail);
 
-        $user = self::getByEmail($inputEmail);
+        $email = \PasswordReset\Repository::getEmailByToken($token);
+
+        $user = Repository::getByEmail($email);
 
         self::updatePassword($user->id, $newPassword, $newPasswordConfirm);
 

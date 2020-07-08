@@ -12,12 +12,22 @@ $router->group([
     $router->group([
         'prefix' => '{productID}'
     ], function($router){
+        $router->get('/', 'MainController@getByID');
+        $router->delete('/', 'MainController@delete');
     });
 
+});
+
+$router->group([
+    'namespace'   => '\Controllers\ProductCategory',
+    'prefix' => 'product-category'
+], function($router){
+    $router->get('/', 'MainController@get');
+    $router->post('/', 'MainController@create');
+
     $router->group([
-        'namespace'   => '\Controllers\ProductCategory',
-        'prefix' => 'category'
+        'prefix' => '{categoryID}'
     ], function($router){
-        $router->get('/', 'MainController@get');
+        $router->delete('/', 'MainController@delete');
     });
 });

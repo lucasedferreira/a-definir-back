@@ -1,4 +1,10 @@
 <?php
+    if(!function_exists('random_string_generator')){
+        function random_string_generator(){
+            return substr(str_shuffle(str_repeat('abcdefghijklmnopqrstuvwxyz0123456789', 10)), 0, 20);
+        }
+    }
+
     if(!function_exists('_dd')){
         function _dd(...$args)
         {

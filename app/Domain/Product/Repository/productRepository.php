@@ -13,6 +13,16 @@ class Repository
 
     public static function create($product)
     {
-        Product::create($product);
+        return Product::create($product);
+    }
+
+    public static function getByID($productID)
+    {
+        return Product::find($productID);
+    }
+
+    public static function delete($productID)
+    {
+        Product::find($productID)->delete();
     }
 }

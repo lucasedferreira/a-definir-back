@@ -22,7 +22,7 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
-$app->withFacades(false);
+$app->withFacades();
 $app->withEloquent();
 
 /*
@@ -79,7 +79,7 @@ $app->routeMiddleware(array_merge(
 */
 
 $app->register(Providers\AppServiceProvider::class);
-$app->register(\Illuminate\Mail\MailServiceProvider::class);
+$app->register(Illuminate\Mail\MailServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -99,5 +99,8 @@ $app->router->group([], function ($router) {
 $app->configure('view');
 $app->configure('services');
 $app->configure('mail');
+$app->alias('mailer', Illuminate\Mail\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
 
 return $app;
